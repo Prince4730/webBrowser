@@ -27,7 +27,7 @@
                                             <searchBar contentMode="redraw" placeholder="Search Here" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcO-aG-EJm">
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="webSearch" returnKeyType="google" enablesReturnKeyAutomatically="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="5"/>
@@ -81,6 +81,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="searchUrl" destination="sGj-Nl-LCA" id="ZHx-th-Kd9"/>
                         <outlet property="searchbar" destination="WcO-aG-EJm" id="TcO-vp-I3u"/>
                     </connections>
                 </viewController>
