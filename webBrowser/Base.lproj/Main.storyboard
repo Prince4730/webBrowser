@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +10,86 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="webBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1A-Jh-Aue">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SearchBackground" translatesAutoresizingMaskIntoConstraints="NO" id="hgL-eS-mJp">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="mMc-RH-Efb">
+                                        <rect key="frame" x="20" y="355" width="374" height="152"/>
+                                        <subviews>
+                                            <searchBar contentMode="redraw" placeholder="Search Here" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcO-aG-EJm">
+                                                <rect key="frame" x="0.0" y="0.0" width="374" height="56"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </searchBar>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGj-Nl-LCA">
+                                                <rect key="frame" x="93.5" y="96" width="187" height="56"/>
+                                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
+                                                <state key="normal" title="Search">
+                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JD3-L2-uSX"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="WcO-aG-EJm" firstAttribute="leading" secondItem="mMc-RH-Efb" secondAttribute="leading" id="McG-Yd-HQG"/>
+                                            <constraint firstItem="sGj-Nl-LCA" firstAttribute="width" secondItem="WcO-aG-EJm" secondAttribute="width" multiplier="0.5:1" id="iP0-mb-Hxk"/>
+                                            <constraint firstAttribute="trailing" secondItem="WcO-aG-EJm" secondAttribute="trailing" id="yRe-0O-hs1"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="mMc-RH-Efb" firstAttribute="leading" secondItem="c1A-Jh-Aue" secondAttribute="leading" constant="20" id="7xa-Wx-XUz"/>
+                                    <constraint firstItem="mMc-RH-Efb" firstAttribute="centerX" secondItem="c1A-Jh-Aue" secondAttribute="centerX" id="QPf-Fo-WQg"/>
+                                    <constraint firstItem="hgL-eS-mJp" firstAttribute="top" secondItem="c1A-Jh-Aue" secondAttribute="top" id="elo-yl-WWd"/>
+                                    <constraint firstAttribute="trailing" secondItem="hgL-eS-mJp" secondAttribute="trailing" id="gck-6t-af5"/>
+                                    <constraint firstAttribute="bottom" secondItem="hgL-eS-mJp" secondAttribute="bottom" id="hG2-zB-KQa"/>
+                                    <constraint firstItem="hgL-eS-mJp" firstAttribute="leading" secondItem="c1A-Jh-Aue" secondAttribute="leading" id="maC-c2-ZAF"/>
+                                    <constraint firstItem="mMc-RH-Efb" firstAttribute="centerY" secondItem="c1A-Jh-Aue" secondAttribute="centerY" id="pTa-3c-tU4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="c1A-Jh-Aue" secondAttribute="bottom" id="DfF-2z-VXb"/>
+                            <constraint firstAttribute="trailing" secondItem="c1A-Jh-Aue" secondAttribute="trailing" id="Fuv-Nd-csA"/>
+                            <constraint firstItem="c1A-Jh-Aue" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="b9D-cq-paM"/>
+                            <constraint firstItem="c1A-Jh-Aue" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="sNT-r6-JEX"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="searchbar" destination="WcO-aG-EJm" id="TcO-vp-I3u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="117.85714285714285"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="SearchBackground" width="213" height="300"/>
+    </resources>
 </document>
