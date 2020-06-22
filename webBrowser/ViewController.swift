@@ -9,12 +9,12 @@
 import UIKit
 import SafariServices
 
-class ViewController: UIViewController,SFSafariViewControllerDelegate {
+class ViewController: UIViewController {
     @IBOutlet weak var searchbar: UISearchBar!
     @IBOutlet weak var searchUrl: UIButton!
     var urlString=""
     
-    
+    var safariController: SFSafariViewController?
     override func viewDidLoad() {
         super.viewDidLoad()
         searchUrl.isEnabled=false
@@ -46,13 +46,14 @@ class ViewController: UIViewController,SFSafariViewControllerDelegate {
         var escapedString = originalString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         escapedString = "https://www.google.com/search?client=safari&rls=en&q=\(escapedString ?? "")"
         
-        if urlString.contains("youtube")
-        {
-            showAlert()
+        let youtubeCheckResult = checkYoutubeUrl(urlStr: urlString)
+        if (youtubeCheckResult){
+            
+            showAlertInViewControllerForYoutubeUrl()
         }
         else{
             if let url = URL(string: escapedString ?? "") {
-                var safariController: SFSafariViewController?
+                
                 if #available(iOS 11.0, *) {
                     safariController = SFSafariViewController(url: url)
                 } else {
@@ -65,14 +66,35 @@ class ViewController: UIViewController,SFSafariViewControllerDelegate {
         
         
     }
-    
-    func showAlert(){
+    func showAlertInSafariViewForYoutubeUrl(){
+        let alert = UIAlertController(title: "Alert!", message: "Sorry,this page can’t be loaded", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: {(action:UIAlertAction!) in
+            self.safariController?.dismiss(animated: true, completion: nil)
+        }))
+        
+        
+        safariController?.present(alert, animated: true, completion: nil)
+        
+    }
+    func showAlertInViewControllerForYoutubeUrl(){
         
         let alert = UIAlertController(title: "Alert!", message: "Sorry,this page can’t be loaded", preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
         
         self.present(alert, animated: true, completion: nil)
+    }
+    func checkYoutubeUrl(urlStr:String)->Bool{
+        let youtubeRegex = "(http(s)?:\\/\\/)?(www\\.|m\\.)?youtu(be\\.com|\\.be)(\\/watch\\?([&=a-z]{0,})(v=[\\d\\w]{1,}).+|\\/[\\d\\w]{1,})"
+        
+        let youtubeCheckResult = NSPredicate(format: "SELF MATCHES %@", youtubeRegex)
+        if youtubeCheckResult.evaluate(with: urlStr) || urlStr.uppercased().contains("YOUTUBE"){
+            return true
+        }
+        else{
+            return false
+        }
     }
     @objc func dismissKeyboard() {
         view.endEditing(true)
@@ -94,6 +116,7 @@ class ViewController: UIViewController,SFSafariViewControllerDelegate {
         self.view.frame.origin.y = 0
     }
     
+    
 }
 
 extension ViewController : UISearchBarDelegate{
@@ -111,5 +134,28 @@ extension ViewController : UISearchBarDelegate{
     {
         openSafariWebView()
     }
+    
 }
-
+extension ViewController:SFSafariViewControllerDelegate{
+    func safariViewController(_ controller: SFSafariViewController, initialLoadDidRedirectTo URL: URL) {
+        let urlStr=URL.valueOf("q") ?? ""
+        let youtubeCheckResult = checkYoutubeUrl(urlStr: urlStr)
+        if (youtubeCheckResult){
+            showAlertInSafariViewForYoutubeUrl()
+        }
+        
+    }
+    
+}
+extension String {
+    func matches(_ regex: String) -> Bool {
+        return self.range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+    
+}
+extension URL {
+    func valueOf(_ queryParamaterName: String) -> String? {
+        guard let url = URLComponents(string: self.absoluteString) else { return nil }
+        return url.queryItems?.first(where: { $0.name == queryParamaterName })?.value
+    }
+}
